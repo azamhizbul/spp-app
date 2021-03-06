@@ -3,8 +3,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Petugas
@@ -12,10 +12,62 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?= base_url('/admin/Petugas/')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Petugas</p>
+                </a>
+              </li>
               <li class="nav-item">
-                <a href="<?= base_url('/admin/Petugas/addDataPetugas')?>" class="nav-link active">
+                <a href="<?= base_url('/admin/Petugas/addDataPetugas')?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Petugas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Kelas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?= base_url('/admin/Kelas/')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Kelas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('/admin/Kelas/tambahKelas')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah Kelas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Spp
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="<?= base_url('/admin/Spp/')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daftar Spp</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?= base_url('/admin/Spp/tambahSpp')?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah Spp</p>
                 </a>
               </li>
             </ul>
