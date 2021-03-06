@@ -16,6 +16,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?= base_url('/assets/theme/plugins/fontawesome-free/css/all.min.css')?>">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url('/assets/theme/dist/css/adminlte.min.css')?>">
+  <?php if(!empty($cdnCss)) :  ?>
+    <?php foreach($cdnCss as $cc) :?>
+      <link rel="stylesheet" href="<?= $cc ?>" type="text/css">
+    <?php endforeach?>
+  <?php endif ?>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

@@ -48,55 +48,55 @@ class Spp extends CI_Controller {
         redirect('/admin/Spp/tambahSpp');   
     }
 
-    public function editKelas($id) {
-        $title = 'Edit Kelas';
-        $listKelas = $this->DataModel->getOneDataWhere('kelas', 'id_kelas', $id);
+    public function editSpp($id) {
+        $title = 'Edit Spp';
+        $listSpp = $this->DataModel->getOneDataWhere('spp', 'id_spp', $id);
 		$data = [
-			'content' => '/admin/v-editKelas',
+			'content' => '/admin/v-sppEdit',
 			'title' => $title,
-            'listKelas'=> $listKelas
+            'listSpp'=> $listSpp
 		];
 		$this->load->view('/template/mainContent', $data);
     }
 
-    public function editDataKelas() {
-        $id = $this->input->post('idKelas');
-        $namaKelas = $this->input->post('namaKelas');
-		$kompetensiKeahlian = $this->input->post('kompetensiKeahlian');
+    public function editDataSpp() {
+        $id = $this->input->post('idSpp');
+        $tahun = $this->input->post('tahun');
+		$nominal = $this->input->post('nominal');
 		$data = array(
-			'nama_kelas' => $namaKelas, 
-			'kompetensi_keahlian' => $kompetensiKeahlian, 
+			'tahun' => $tahun, 
+			'nominal' => $nominal, 
 		);
 
-        if( $this->DataModel->updatedData('kelas','id_kelas', $id, $data)) {
-            $this->CsHelper->flashMessage(true, 'Berhasil mengubah data kelas');
+        if( $this->DataModel->updatedData('spp','id_spp', $id, $data)) {
+            $this->CsHelper->flashMessage(true, 'Berhasil mengubah data spp');
         } else {
-            $this->CsHelper->flashMessage(false, 'Gagal mengubah data kelas');
+            $this->CsHelper->flashMessage(false, 'Gagal mengubah data spp');
         }
-        redirect('/admin/Kelas/');
+        redirect('/admin/Spp/');
     }
 
-    public function hapusKelas($id) {
-        $title = 'Hapus Kelas ';
-		$listKelas = $this->DataModel->getOneDataWhere('kelas', 'id_kelas', $id);
+    public function hapusSpp($id) {
+        $title = 'Hapus Spp ';
+		$listSpp = $this->DataModel->getOneDataWhere('spp', 'id_spp', $id);
 		$data = [
 			'content' => '/content/delete',
 			'title' => $title,
-			'titleHead' => 'Hapus Kelas',
-			'formAction' => '/admin/Kelas/hapusDataKelas/'.$listKelas[0]->id_kelas,
+			'titleHead' => 'Hapus Spp',
+			'formAction' => '/admin/Spp/hapusDataSpp/'.$listSpp[0]->id_spp,
 			'backAction' => '/admin/Petugas/',
-			'dataDeleted' => $listKelas[0]->nama_kelas
+			'dataDeleted' => $listSpp[0]->tahun
 		];
 		$this->load->view('/template/mainContent', $data);
     }
 
-    public function hapusDataKelas($id) {
-        if($this->DataModel->deletedData('kelas', 'id_kelas', $id)){
-			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data kelas');
+    public function hapusDataSpp($id) {
+        if($this->DataModel->deletedData('spp', 'id_spp', $id)){
+			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data spp');
 		} else {
-			$this->CsHelper->flashMessage(false, 'Gagal menghapus data kelas');
+			$this->CsHelper->flashMessage(false, 'Gagal menghapus data spp');
 		}
-		redirect('/admin/Kelas/');
+		redirect('/admin/Spp/');
     }
 
 
