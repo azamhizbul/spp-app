@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2021 at 03:41 PM
+-- Generation Time: Mar 07, 2021 at 07:18 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -30,8 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `kelas` (
   `id_kelas` int(11) NOT NULL,
   `nama_kelas` varchar(10) NOT NULL,
-  `kompetensi_keahlian` int(50) NOT NULL
+  `kompetensi_keahlian` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `kompetensi_keahlian`) VALUES
+(6, 'Kelas 22', 'TKJ'),
+(8, 'kelas 13', 'JARKOM');
 
 -- --------------------------------------------------------
 
@@ -49,6 +57,15 @@ CREATE TABLE `pembayaran` (
   `id_spp` int(11) NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_petugas`, `nisn`, `tgl_bayar`, `bulan_dibayar`, `tahun_dibayar`, `id_spp`, `jumlah_bayar`) VALUES
+(1, 2, '123', '2021-03-06', 'Januari', '2021', 1, 200000),
+(2, 2, '123', '2021-03-24', 'Feb', '2021', 1, 450000),
+(3, 5, '124', '2021-03-31', 'Feb', '2021', 1, 500000);
 
 -- --------------------------------------------------------
 
@@ -70,7 +87,9 @@ CREATE TABLE `petugas` (
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama_petugas`, `level`) VALUES
 (2, 'admin', '$2y$12$NEYcaC9hkWj0miOEg1pIa.cy2yyixlaRT0/gxvpBQoow5QFdkpQzS', 'Gugun', 'admin'),
-(4, 'admin2e', '$2y$12$kap8w74NNXHY3C/GBC9nWOxK5DBp8d4kxBnZV4KcikTKzI9FpUCga', 'osadij', 'petugas');
+(4, 'admin2e', '$2y$12$kap8w74NNXHY3C/GBC9nWOxK5DBp8d4kxBnZV4KcikTKzI9FpUCga', 'osadij', 'petugas'),
+(5, 'petugas', '$2y$12$f8qUB.HemLnaWCUG.phfk.YTll54ywmRoXh8NIoVrQ0oYxkrh.79m', 'Jajang', 'petugas'),
+(6, 'siswa', '$2y$12$Hm47GKhOBcNa8ANKTUW0G.PJoIWuGmbXYtoewJBRCn2NDIU7BKf76', 'Udin', 'siswa');
 
 -- --------------------------------------------------------
 
@@ -88,6 +107,14 @@ CREATE TABLE `siswa` (
   `id_spp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`nisn`, `nis`, `nama`, `id_kelas`, `alamat`, `no_telp`, `id_spp`) VALUES
+('123', '321', 'arifin', 6, 'Bandung', '0258', 1),
+('124', '421', 'Gugun', 6, ' asdasd  ', '124', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +128,14 @@ CREATE TABLE `spp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `spp`
+--
+
+INSERT INTO `spp` (`id_spp`, `tahun`, `nominal`) VALUES
+(1, 2021, 200000),
+(3, 2020, 350000);
+
+--
 -- Indexes for dumped tables
 --
 
@@ -108,7 +143,8 @@ CREATE TABLE `spp` (
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`id_kelas`);
+  ADD PRIMARY KEY (`id_kelas`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- Indexes for table `pembayaran`
@@ -149,35 +185,29 @@ ALTER TABLE `spp`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kelas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `spp`
 --
 ALTER TABLE `spp`
-  MODIFY `id_spp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_spp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `kelas`
---
-ALTER TABLE `kelas`
-  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `siswa` (`id_spp`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pembayaran`
@@ -191,7 +221,8 @@ ALTER TABLE `pembayaran`
 -- Constraints for table `siswa`
 --
 ALTER TABLE `siswa`
-  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_spp`) REFERENCES `spp` (`id_spp`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `siswa_ibfk_1` FOREIGN KEY (`id_spp`) REFERENCES `spp` (`id_spp`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `siswa_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id_kelas`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
