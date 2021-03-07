@@ -13,6 +13,8 @@ class Kelas extends CI_Controller {
     }
 
     public function index(){
+		$this->CsHelper->adminSession();
+
         $title = 'Daftar kelas';
 		$listKelas =  $this->DataModel->getAllData('kelas', 'id_kelas', true);
 		$data = [
@@ -24,6 +26,7 @@ class Kelas extends CI_Controller {
     }
 
     public function tambahKelas(){
+		$this->CsHelper->adminSession();
         $title = 'Tambah Kelas';
 
 		$data = [
@@ -34,6 +37,7 @@ class Kelas extends CI_Controller {
     }
 
     public function tambahDataKelas(){
+		$this->CsHelper->adminSession();
         $namaKelas = $this->input->post('namaKelas');
 		$kompetensiKeahlian = $this->input->post('kompetensiKeahlian');
 		$data = array(
@@ -49,6 +53,7 @@ class Kelas extends CI_Controller {
     }
 
     public function editKelas($id) {
+		$this->CsHelper->adminSession();
         $title = 'Edit Kelas';
         $listKelas = $this->DataModel->getOneDataWhere('kelas', 'id_kelas', $id);
 		$data = [
@@ -60,6 +65,7 @@ class Kelas extends CI_Controller {
     }
 
     public function editDataKelas() {
+		$this->CsHelper->adminSession();
         $id = $this->input->post('idKelas');
         $namaKelas = $this->input->post('namaKelas');
 		$kompetensiKeahlian = $this->input->post('kompetensiKeahlian');
@@ -77,6 +83,7 @@ class Kelas extends CI_Controller {
     }
 
     public function hapusKelas($id) {
+		$this->CsHelper->adminSession();
         $title = 'Hapus Kelas ';
 		$listKelas = $this->DataModel->getOneDataWhere('kelas', 'id_kelas', $id);
 		$data = [
@@ -91,6 +98,7 @@ class Kelas extends CI_Controller {
     }
 
     public function hapusDataKelas($id) {
+		$this->CsHelper->adminSession();
         if($this->DataModel->deletedData('kelas', 'id_kelas', $id)){
 			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data kelas');
 		} else {

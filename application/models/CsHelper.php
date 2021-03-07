@@ -33,6 +33,59 @@ class CsHelper extends CI_Model{
         
     }
 
+    public function setSession($data) {
+        $indexesData = $data[0];
+        $userData = array(
+            'id_petugas' => $indexesData->id_petugas,
+            'username'=> $indexesData->username,
+            'nama_petugas'=> $indexesData->nama_petugas,
+            'level'=> $indexesData->level,
+            'logged_in' => TRUE
+        );
+        $this->session->set_userdata($userData);
+    }
+
+    public function unsetSession() {
+        $this->session->unset_userdata('logged_in', false);
+        $data = array('id_petugas', 'username', 'nama_petugas', 'level');
+        $destroy = $this->session->unset_userdata($data);
+        return $destroy;
+    }
+
+    public function adminSession(){
+        if( !$this->session->userdata('logged_in')) {
+            redirect('/Welcome');
+        } 
+        
+        if($this->session->userdata('level') != 'admin'){
+            show_404();
+        }
+    }
+
+    public function petugasSession(){
+        if( !$this->session->userdata('logged_in')) {
+            redirect('/Welcome');
+        } 
+        
+        if($this->session->userdata('level') != 'petugas'){
+            show_404();
+        }
+    }
+
+    public function siswaSession(){
+        if( !$this->session->userdata('logged_in')) {
+            redirect('/Welcome');
+        } 
+        
+        if($this->session->userdata('level') != 'siswa'){
+            show_404();
+        }
+    }
+
+    public function getSession(){
+        var_dump( $this->session->userdata('username'));
+    }
+
     public function flashMessage($status, $message) {
         if($status){
            return  $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">

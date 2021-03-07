@@ -28,6 +28,7 @@ class Petugas extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->CsHelper->adminSession();
 		$title = 'Daftar Petugas / Pengguna';
 		$listPetugas =  $this->DataModel->getAllData('petugas', 'id_petugas', true);
 		$data = [
@@ -39,6 +40,7 @@ class Petugas extends CI_Controller {
 	}
 
 	public function addDataPetugas(){
+		$this->CsHelper->adminSession();
 		$title = 'Tambah user';
 		$data = [
 			'content' => '/admin/v-petugas',
@@ -49,7 +51,7 @@ class Petugas extends CI_Controller {
 
 	public function insertPetugas()
 	{
-		
+		$this->CsHelper->adminSession();
 		$userneme = $this->input->post('username');
 		$password = $this->input->post('password');
 		$name = $this->input->post('nama');
@@ -77,6 +79,7 @@ class Petugas extends CI_Controller {
 	}
 
 	public function updatePetugas($id) {
+		$this->CsHelper->adminSession();
 		$title = 'Edit Petugas / Pengguna';
 		$listPetugas = $this->DataModel->getOneDataWhere('petugas', 'id_petugas', $id);
 		$data = [
@@ -88,6 +91,7 @@ class Petugas extends CI_Controller {
 	}
 
 	public function updateDataPetugas(){
+		$this->CsHelper->adminSession();
 		$userneme = $this->input->post('username');
 		$name = $this->input->post('nama');
 		$role = $this->input->post('role');
@@ -112,6 +116,7 @@ class Petugas extends CI_Controller {
 	}
 
 	public function deleteDataPetugas($id) {
+		$this->CsHelper->adminSession();
 		$title = 'Hapus Petugas / Pengguna';
 		$listPetugas = $this->DataModel->getOneDataWhere('petugas', 'id_petugas', $id);
 		$data = [
@@ -126,6 +131,7 @@ class Petugas extends CI_Controller {
 	}
 
 	public function deletePengguna($id) {
+		$this->CsHelper->adminSession();
 		if($this->DataModel->deletedData('petugas', 'id_petugas', $id)){
 			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data petugas');
 		} else {

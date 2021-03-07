@@ -32,7 +32,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
+        <a class="nav-link" href="<?= base_url('/Welcome/destroy')?>">
           Logout
         </a>
       </li>
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User</a>
+          <a href="#" class="d-block"><?= empty($this->session->userdata('username')) ? 'anonymus' : $this->session->userdata('nama_petugas') ?></a>
         </div>
       </div>
 

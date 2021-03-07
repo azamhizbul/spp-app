@@ -30,8 +30,8 @@ public function getAllData($table, $itemOrder, $desc) {
     return  $this->db->get($table)->result();
 }
 
-public function getDataWhere($table, $param, $desc) {
-    return  $this->db->get_where($table, $param, 1)->result();
+public function getDataWhere($table, $param, $paramValue) {
+    return  $this->db->get_where($table, array($param => $paramValue))->result();
 }
 
 public function getOneDataWhere($table, $param, $paramValue) {

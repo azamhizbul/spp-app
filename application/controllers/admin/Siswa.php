@@ -13,6 +13,7 @@ class Siswa extends CI_Controller {
     }
 
     public function index(){
+        $this->CsHelper->adminSession();
         $title = 'Daftar Spp';
 		$siswa =  $this->SiswaModel->getListSiswa();
 		$data = [
@@ -24,6 +25,7 @@ class Siswa extends CI_Controller {
     }
 
     public function tambahSiswa(){
+        $this->CsHelper->adminSession();
         $title = 'Tambah Siswa';
         $kelas = $this->DataModel->getAllData('kelas','id_kelas', true);
         $spp = $this->DataModel->getAllData('spp','id_spp', true);
@@ -37,6 +39,7 @@ class Siswa extends CI_Controller {
     }
 
     public function tambahDataSiswa(){
+        $this->CsHelper->adminSession();
         $nisn = $this->input->post('nisn');
         $nis = $this->input->post('nis');
         $nama = $this->input->post('nama');
@@ -75,6 +78,7 @@ class Siswa extends CI_Controller {
     }
 
     public function editSiswa($id) {
+        $this->CsHelper->adminSession();
         $title = 'Edit Siswa';
         $listSiswa = $this->DataModel->getOneDataWhere('siswa', 'nisn', $id);
         $kelas = $this->DataModel->getAllData('kelas','id_kelas', true);
@@ -90,6 +94,7 @@ class Siswa extends CI_Controller {
     }
 
     public function editDataSiswa() {
+        $this->CsHelper->adminSession();
         $nisn = $this->input->post('nisn');
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
@@ -113,6 +118,7 @@ class Siswa extends CI_Controller {
     }
 
     public function hapusSiswa($id) {
+        $this->CsHelper->adminSession();
         $title = 'Hapus Siswa ';
 		$listSiswa = $this->DataModel->getOneDataWhere('siswa', 'nisn', $id);
 		$data = [
@@ -127,6 +133,7 @@ class Siswa extends CI_Controller {
     }
 
     public function hapusDataSiswa($id) {
+        $this->CsHelper->adminSession();
         if($this->DataModel->deletedData('siswa', 'nisn', $id)){
 			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data siswa');
 		} else {

@@ -13,6 +13,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function index(){
+        $this->CsHelper->adminSession();
         $title = 'Daftar Pembayaran';
 		$pembayaran =  $this->PembayaranModel->getListPembayaran();
 		$data = [
@@ -24,6 +25,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function tambahPembayaran(){
+        $this->CsHelper->adminSession();
         $title = 'Tambah Pembayaran';
         $siswa = $this->DataModel->getAllData('siswa','nisn', false);
         $petugas = $this->DataModel->getAllData('petugas','id_petugas', true);
@@ -42,6 +44,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function tambahDataPembayaran(){
+        $this->CsHelper->adminSession();
         $idPetugas = $this->input->post('idPetugas');
         $nisn = $this->input->post('nisn');
         $tanggalBayar = $this->input->post('tanggalBayar');
@@ -69,6 +72,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function editSiswa($id) {
+        $this->CsHelper->adminSession();
         $title = 'Edit Siswa';
         $listSiswa = $this->DataModel->getOneDataWhere('siswa', 'nisn', $id);
         $kelas = $this->DataModel->getAllData('kelas','id_kelas', true);
@@ -84,6 +88,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function editDataSiswa() {
+        $this->CsHelper->adminSession();
         $nisn = $this->input->post('nisn');
         $nama = $this->input->post('nama');
         $alamat = $this->input->post('alamat');
@@ -107,6 +112,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function hapusSiswa($id) {
+        $this->CsHelper->adminSession();
         $title = 'Hapus Siswa ';
 		$listSiswa = $this->DataModel->getOneDataWhere('siswa', 'nisn', $id);
 		$data = [
@@ -121,6 +127,7 @@ class Pembayaran extends CI_Controller {
     }
 
     public function hapusDataSiswa($id) {
+        $this->CsHelper->adminSession();
         if($this->DataModel->deletedData('siswa', 'nisn', $id)){
 			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data siswa');
 		} else {

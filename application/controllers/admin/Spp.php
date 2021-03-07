@@ -13,6 +13,7 @@ class Spp extends CI_Controller {
     }
 
     public function index(){
+		$this->CsHelper->adminSession();
         $title = 'Daftar Spp';
 		$listSpp =  $this->DataModel->getAllData('spp', 'id_spp', true);
 		$data = [
@@ -24,6 +25,7 @@ class Spp extends CI_Controller {
     }
 
     public function tambahSpp(){
+		$this->CsHelper->adminSession();
         $title = 'Tambah Spp';
 
 		$data = [
@@ -34,6 +36,7 @@ class Spp extends CI_Controller {
     }
 
     public function tambahDataSpp(){
+		$this->CsHelper->adminSession();
         $tahun = $this->input->post('tahun');
 		$nominal = $this->input->post('nominal');
 		$data = array(
@@ -49,6 +52,7 @@ class Spp extends CI_Controller {
     }
 
     public function editSpp($id) {
+		$this->CsHelper->adminSession();
         $title = 'Edit Spp';
         $listSpp = $this->DataModel->getOneDataWhere('spp', 'id_spp', $id);
 		$data = [
@@ -60,6 +64,7 @@ class Spp extends CI_Controller {
     }
 
     public function editDataSpp() {
+		$this->CsHelper->adminSession();
         $id = $this->input->post('idSpp');
         $tahun = $this->input->post('tahun');
 		$nominal = $this->input->post('nominal');
@@ -77,6 +82,7 @@ class Spp extends CI_Controller {
     }
 
     public function hapusSpp($id) {
+		$this->CsHelper->adminSession();
         $title = 'Hapus Spp ';
 		$listSpp = $this->DataModel->getOneDataWhere('spp', 'id_spp', $id);
 		$data = [
@@ -91,6 +97,7 @@ class Spp extends CI_Controller {
     }
 
     public function hapusDataSpp($id) {
+		$this->CsHelper->adminSession();
         if($this->DataModel->deletedData('spp', 'id_spp', $id)){
 			$this->CsHelper->flashMessage(true, 'Berhasil meghapus data spp');
 		} else {
